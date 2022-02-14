@@ -16,7 +16,7 @@ mongoose.connect('mongodb+srv://kimjiho1125:rlawlgh1125@youtubeclone.ny63a.mongo
     .catch(err => console.log(err))
 
 
-app.get('/', (req, res) => res.send('Hello world!'))
+app.get('/', (req, res) => res.send('Hello world! 새해 복 많이 받으세요!!'))
 
 app.post('/register', (req, res) => {
 
