@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../../_actions/user_action';
-
+import { useNavigate } from 'react-router-dom';
 function RegisterPage(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [Name, setName] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [Email, setEmail] = useState('');
+  const [Name, setName] = useState('');
+  const [Password, setPassword] = useState('');
+  const [ConfirmPassword, setConfirmPassword] = useState('');
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
@@ -27,24 +28,23 @@ function RegisterPage(props) {
   };
 
   const onSubmitHandler = (event) => {
-    event.preventDefault(); //버튼 누를 때 새로고침 안하게해준다
+    event.preventDefault();
 
-    if(Password !== ConfirmPassword) {
-      return alert("비밀번호와 비밀번호 확인은 같아야 합니다.")
+    if (Password !== ConfirmPassword) {
+      return alert('비밀번호와 비밀번호 확인은 같아야 합니다.');
     }
 
     let body = {
       email: Email,
       password: Password,
-      name: Name
+      name: Name,
     };
-
     dispatch(registerUser(body)).then((response) => {
-        if(response.payload.success) {
-            props.history.push("/login")
-        } else {
-          alert('Failed to sign up');
-        }
+      if (response.payload.success) {
+        navigate("/login");
+      } else {
+        alert('Failed to sign up');
+      }
     });
   };
 
@@ -55,7 +55,7 @@ function RegisterPage(props) {
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        height: '100%',
+        height: '100vh',
       }}
     >
       <form

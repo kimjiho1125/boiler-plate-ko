@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../../_actions/user_action';
 import { useNavigate } from 'react-router-dom';
-import {loginUser} from '../../../_actions/user_action';
-
 
 function LoginPage(props) {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const [Email, setEmail] = useState('');
@@ -21,7 +19,7 @@ function LoginPage(props) {
   };
 
   const onSubmitHandler = (event) => {
-    event.preventDefault(); //버튼 누를 때 새로고침 안하게해준다
+    event.preventDefault();
 
     let body = {
       email: Email,
@@ -30,9 +28,9 @@ function LoginPage(props) {
 
     dispatch(loginUser(body)).then((response) => {
       if (response.payload.loginSuccess) {
-        navigate(-1);
+        navigate("/");
       } else {
-        alert('Error');
+        alert('Error˝');
       }
     });
   };
@@ -44,7 +42,7 @@ function LoginPage(props) {
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        height: '100%',
+        height: '100vh',
       }}
     >
       <form
@@ -55,12 +53,11 @@ function LoginPage(props) {
         <input type="email" value={Email} onChange={onEmailHandler} />
         <label>Password</label>
         <input type="password" value={Password} onChange={onPasswordHandler} />
-
         <br />
-        <button type="submit">login</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 }
 
-export default LoginPage
+export default LoginPage;
